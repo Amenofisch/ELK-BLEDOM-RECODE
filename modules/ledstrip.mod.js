@@ -17,17 +17,15 @@ class Ledstrip {
 
     d2h(d) {
         var s = (+d).toString(16);
-        if (s.length < 2) {
-            s = '0' + s;
-        }
+        if (s.length < 2) s = '0' + s;
         return s;
-    }
+    } 
 
-    async setColor(hex) {
-        hex = hex.replace("#", ""); // Remove the # if it's there
+    async setColor(value) {
+        value = value.replace("#", ""); // Remove the # if it's there
 
-        console.log(`Setting color for ${this.name} to ${hex} at handle ${this.handle} on device ${this.bid}`);
-        await shell.exec(`gatttool -i ${this.device} -b ${this.bid} --char-write-req -a ${this.handle} -n 7e070503${hex}10ef`);
+        console.log(`Setting color for ${this.name} to ${value} at handle ${this.handle} on device ${this.bid}`);
+        await shell.exec(`gatttool -i ${this.device} -b ${this.bid} --char-write-req -a ${this.handle} -n 7e070503${value}10ef`);
         if (shell.error()) return false;
         return true;    
     }
@@ -45,6 +43,13 @@ class Ledstrip {
         console.log(`Setting brightness for ${this.name} to ${value} at handle ${this.handle} on device ${this.bid}`);
 
         await shell.exec(`gatttool -i ${this.device} -b ${this.bid} --char-write-req -a ${this.handle} -n 7e0401${value}01ffff00ef`);
+        if (shell.error()) return false;
+        return true;
+    }
+
+    async sendCustom(value) {
+        console.log(`Sending custom command for ${this.name} to ${value} at handle ${this.handle} on device ${this.bid}`);
+        await shell.exec(`gatttool -i ${this.device} -b ${this.bid} --char-write-req -a ${this.handle} -n ${value}`);
         if (shell.error()) return false;
         return true;
     }
