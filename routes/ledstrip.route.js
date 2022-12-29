@@ -35,7 +35,6 @@ router.post('/led/brightness/:id', function(req, res, next) {
 });
 
 router.post('/led/color/:id', function(req, res, next) {
-    console.log(req.body);
     if(req.body.value == undefined) return res.status(400).send("No value specified");
     let value = req.body.value;
     if(typeof value != "string") return res.status(400).send("Value must be a string");
