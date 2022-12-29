@@ -2,6 +2,9 @@ const config = require('./config/config');
 var express = require('express');
 var app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 var ledstripRouter = require('./routes/ledstrip.route.js');
 
 app.use('/', ledstripRouter);
