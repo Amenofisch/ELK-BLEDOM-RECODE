@@ -20,7 +20,8 @@ router.post('/led/power/:id', function(req, res, next) {
     if(typeof value != "boolean") return res.status(400).send("Value must be a boolean");
 
     let device = config.devices[req.params.id];
-    device.setPower(value);
+    let resp = device.setPower(value);
+    res.send(resp);
 });
 
 router.post('/led/brightness/:id', function(req, res, next) {
@@ -29,7 +30,8 @@ router.post('/led/brightness/:id', function(req, res, next) {
     if(typeof value != "number") return res.status(400).send("Value must be a number");
 
     let device = config.devices[req.params.id];
-    device.setBrightness(value);
+    let resp = device.setBrightness(value);
+    res.send(resp);
 });
 
 router.post('/led/color/:id', function(req, res, next) {
@@ -39,7 +41,8 @@ router.post('/led/color/:id', function(req, res, next) {
     if(typeof value != "string") return res.status(400).send("Value must be a string");
 
     let device = config.devices[req.params.id];
-    device.setColor(value.toLowerCase());
+    let resp = device.setColor(value.toLowerCase());
+    res.send(resp);
 });
 
 module.exports = router;
