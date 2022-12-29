@@ -18,7 +18,7 @@ class Ledstrip {
 
     async setColor(hex) {
         hex = hex.replace("#", ""); // Remove the # if it's there
-        
+
         console.log(`Setting color for ${this.name} to ${hex} at handle ${this.handle} on device ${this.bid}`);
         await shell.exec(`gatttool -i ${config.bluetooth.device} -b ${this.bid} --char-write-req -a ${this.handle} -n 7e070503${hex}10ef`);
         if (shell.error()) return false;
@@ -34,7 +34,7 @@ class Ledstrip {
     
     async setBrightness(value) {
         if(value < 0 || value > 100) throw new Error("Brightness must be between 0 and 100");
-        value = d2h(value);
+        value = this.d2h(value);
         console.log(`Setting brightness for ${this.name} to ${value} at handle ${this.handle} on device ${this.bid}`);
 
         await shell.exec(`gatttool -i ${config.bluetooth.device} -b ${this.bid} --char-write-req -a ${this.handle} -n 7e0401${hex}01ffff00ef`);

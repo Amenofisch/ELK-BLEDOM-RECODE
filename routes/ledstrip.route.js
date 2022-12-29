@@ -39,7 +39,7 @@ router.post('/led/color/:id', function(req, res, next) {
     if(typeof value != "string") return res.status(400).send("Value must be a string");
 
     let device = config.devices[req.params.id];
-    device.setColor(value);
+    device.setColor(value.toLowerCase());
 });
 
 module.exports = router;
