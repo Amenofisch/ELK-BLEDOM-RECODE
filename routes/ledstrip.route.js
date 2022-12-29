@@ -15,8 +15,8 @@ router.get('/led/:id', function(req, res, next) {
 });
 
 router.post('/led/power/:id', function(req, res, next) {
+    if(req.body.value == undefined) return res.status(400).send("No value specified");
     let value = req.body.value;
-    if(value == undefined) return res.status(400).send("No value specified");
     if(typeof value != "boolean") return res.status(400).send("Value must be a boolean");
 
     let device = config.devices[req.params.id];
@@ -24,8 +24,8 @@ router.post('/led/power/:id', function(req, res, next) {
 });
 
 router.post('/led/brightness/:id', function(req, res, next) {
+    if(req.body.value == undefined) return res.status(400).send("No value specified");
     let value = req.body.value;
-    if(value == undefined) return res.status(400).send("No value specified");
     if(typeof value != "number") return res.status(400).send("Value must be a number");
 
     let device = config.devices[req.params.id];
@@ -33,8 +33,8 @@ router.post('/led/brightness/:id', function(req, res, next) {
 });
 
 router.post('/led/color/:id', function(req, res, next) {
+    if(req.body.value == undefined) return res.status(400).send("No value specified");
     let value = req.body.value;
-    if(value == undefined) return res.status(400).send("No value specified");
     if(typeof value != "string") return res.status(400).send("Value must be a string");
 
     let device = config.devices[req.params.id];
