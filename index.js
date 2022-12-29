@@ -7,7 +7,7 @@ app.use(express.urlencoded({ extended: true }));
 
 var ledstripRouter = require('./routes/ledstrip.route.js');
 
-app.use('/', ledstripRouter);
+app.use('/led', ledstripRouter);
 
 app.get('/', function (req, res) {
     res.send('Hello World!');
