@@ -17,5 +17,4 @@ app.get('/', (req, res) => res.send(`${config.server.name} ${config.server.versi
 
 app.listen(config.server.port, function () {
     console.log(`${config.server.name} ${config.server.version} listening on port ${config.server.port}!`);
-    }
-);
+});
