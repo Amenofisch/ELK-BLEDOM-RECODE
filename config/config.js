@@ -1,6 +1,6 @@
 var Ledstrip = require('../modules/ledstrip.mod.js');
 
-class Config {
+module.exports = class Config {
     static server = {
         name: "ELK-BLEDOM-RECODE",
         version: "v1.0.0",
@@ -14,5 +14,3 @@ class Config {
         new Ledstrip("ELK-BLEDOM 2", "BE:59:0D:00:16:DB", "0x0009"),
     ]
 }
-
-module.exports = { Config }; 
