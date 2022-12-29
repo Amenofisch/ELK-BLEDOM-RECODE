@@ -37,7 +37,7 @@ class Ledstrip {
         value = this.d2h(value);
         console.log(`Setting brightness for ${this.name} to ${value} at handle ${this.handle} on device ${this.bid}`);
 
-        await shell.exec(`gatttool -i ${this.device} -b ${this.bid} --char-write-req -a ${this.handle} -n 7e0401${hex}01ffff00ef`);
+        await shell.exec(`gatttool -i ${this.device} -b ${this.bid} --char-write-req -a ${this.handle} -n 7e0401${value}01ffff00ef`);
         if (shell.error()) return false;
         return true;
     }
