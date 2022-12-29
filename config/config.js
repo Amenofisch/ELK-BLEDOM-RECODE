@@ -10,7 +10,7 @@ module.exports = class Config {
         device: "hci0"
     }
     static devices = [
-        new Ledstrip("ELK-BLEDOM 1", "BE:FF:20:00:06:FF", "0x0008"),
-        new Ledstrip("ELK-BLEDOM 2", "BE:59:0D:00:16:DB", "0x0009"),
+        new Ledstrip("ELK-BLEDOM 1", "BE:FF:20:00:06:FF", "0x0008", this.bluetooth.device),
+        new Ledstrip("ELK-BLEDOM 2", "BE:59:0D:00:16:DB", "0x0009", this.bluetooth.device),
     ]
 }
