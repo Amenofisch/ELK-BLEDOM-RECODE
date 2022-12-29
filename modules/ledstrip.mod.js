@@ -1,5 +1,12 @@
 var shell = require("shelljs");
 
+/**
+ * @class Ledstrip
+ * @param {string} name The name of the LED strip
+ * @param {string} bid The Bluetooth ID of the LED strip
+ * @param {string} handle The handle of the LED strip
+ * @param {string} device The Bluetooth device to use
+ */
 class Ledstrip {
     constructor(name, bid, handle, device) {
         this.name = name;
