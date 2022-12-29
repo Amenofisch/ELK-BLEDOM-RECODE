@@ -1,0 +1,20 @@
+{
+  "name": "elk-bledom-recode",
+  "version": "1.0.0",
+  "description": "a recode of elk-bledom on github",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "iot",
+    "pi",
+    "led"
+  ],
+  "author": "amenofisch",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "shelljs": "^0.8.5"
+  }
+}
