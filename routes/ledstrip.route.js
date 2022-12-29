@@ -20,7 +20,7 @@ router.post('/power', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < config.devices.length; i++) {
-        resp.push(config.devices[i].setPower(value));
+        resp.push("status: " + config.devices[i].setPower(value));
     }
     res.send(resp);
 })
@@ -33,7 +33,7 @@ router.post('/brightness', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < config.devices.length; i++) {
-        resp.push(config.devices[i].setBrightness(value));
+        resp.push("status: " + config.devices[i].setBrightness(value));
     }
     res.send(resp);
 })
@@ -46,7 +46,7 @@ router.post('/color', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < config.devices.length; i++) {
-        resp.push(config.devices[i].setColor(value.toLowerCase()));
+        resp.push("status: " + config.devices[i].setColor(value.toLowerCase()));
     }
     res.send(resp);
 })
