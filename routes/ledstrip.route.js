@@ -7,19 +7,6 @@ router.get('/', function(req, res, next) {
     res.send(config.devices);
 });
 
-// This route takes a custom command for all devices
-router.post('/custom', function(req, res, next) {
-    if(req.body.value == undefined) return res.status(400).send("No value specified");
-    let value = req.body.value;
-    if(typeof value != "string") return res.status(400).send("Value must be a string");
-
-    let resp = [];
-    for(let i = 0; i < config.devices.length; i++) {
-        resp.push("status: " + config.devices[i].sendCustom(value));
-    }
-    res.send(resp);
-});
-
 // This route returns the config of a single device
 router.get('/:id', function(req, res, next) {
     res.send(config.devices[req.params.id]);
@@ -66,14 +53,16 @@ router.post('/color', function(req, res, next) {
     res.send(resp);
 })
 
-// This route takes a custom command for a single device
-router.post('/custom/:id', function(req, res, next) {
+// This route takes a custom command for all devices
+router.post('/custom', function(req, res, next) {
     if(req.body.value == undefined) return res.status(400).send("No value specified");
     let value = req.body.value;
     if(typeof value != "string") return res.status(400).send("Value must be a string");
 
-    let device = config.devices[req.params.id];
-    let resp = device.sendCustom(value);
+    let resp = [];
+    for(let i = 0; i < config.devices.length; i++) {
+        resp.push("status: " + config.devices[i].sendCustom(value));
+    }
     res.send(resp);
 });
 
@@ -107,6 +96,17 @@ router.post('/color/:id', function(req, res, next) {
 
     let device = config.devices[req.params.id];
     let resp = device.setColor(value.toLowerCase());
+    res.send(resp);
+});
+
+// This route takes a custom command for a single device
+router.post('/custom/:id', function(req, res, next) {
+    if(req.body.value == undefined) return res.status(400).send("No value specified");
+    let value = req.body.value;
+    if(typeof value != "string") return res.status(400).send("Value must be a string");
+
+    let device = config.devices[req.params.id];
+    let resp = device.sendCustom(value);
     res.send(resp);
 });
 
