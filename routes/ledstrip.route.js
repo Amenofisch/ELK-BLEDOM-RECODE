@@ -18,7 +18,7 @@ router.get('/:id', function(req, res, next) {
  */
 
 // This route controls the power of all devices
-router.post('/power', function(req, res, next) {
+router.post('/power/all', function(req, res, next) {
     if(req.body.value == undefined) return res.status(400).send("No value specified");
     let value = req.body.value;
     if(typeof value != "boolean") return res.status(400).send("Value must be a boolean");
@@ -31,7 +31,7 @@ router.post('/power', function(req, res, next) {
 })
 
 // This route controls the brightness of all devices
-router.post('/brightness', function(req, res, next) {
+router.post('/brightness/all', function(req, res, next) {
     if(req.body.value == undefined) return res.status(400).send("No value specified");
     let value = req.body.value;
     if(typeof value != "number") return res.status(400).send("Value must be a number");
@@ -44,7 +44,7 @@ router.post('/brightness', function(req, res, next) {
 })
 
 // This route controls the color of all devices
-router.post('/color', function(req, res, next) {
+router.post('/color/all', function(req, res, next) {
     if(req.body.value == undefined) return res.status(400).send("No value specified");
     let value = req.body.value;
     if(typeof value != "string") return res.status(400).send("Value must be a string");
@@ -59,7 +59,7 @@ router.post('/color', function(req, res, next) {
 })
 
 // This route takes a custom command for all devices
-router.post('/custom', function(req, res, next) {
+router.post('/custom/all', function(req, res, next) {
     if(req.body.value == undefined) return res.status(400).send("No value specified");
     let value = req.body.value;
     if(typeof value != "string") return res.status(400).send("Value must be a string");
