@@ -1,243 +1,149 @@
 openapi: 3.0.3
 info:
   title: ELK-BLEDOM-RECODE
-  description: |-
-    This is a sample Pet Store Server based on the OpenAPI 3.0 specification.  You can find out more about
-    Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the pet store, we've switched to the design first approach!
-    You can now help us improve the API whether it's by making changes to the definition itself or to the code.
-    That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
-
-    _If you're looking for the Swagger 2.0/OAS 2.0 version of Petstore, then click [here](https://editor.swagger.io/?url=https://petstore.swagger.io/v2/swagger.yaml). Alternatively, you can load via the `Edit > Load Petstore OAS 2.0` menu option!_
-    
-    Some useful links:
-    - [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)
-    - [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
-  version: 1.0.11
+  description: This is the WIP OpenAPI Specification of ELK-BLEDOM-RECODE.
+  version: 1.0.0
 paths:
-  /led/power:
+  /led/power/all:
     post:
       tags:
-        - LED Strip
-      summary: Change power state of LED Strip
-      description: Change power state of LED Strip
-      operationId: changePower
+        - LED Strip - Power
+      summary: Change power state of  all LED Strips
+      description: Change power state of all LED Strips
+      operationId: changePowerAll
       requestBody:
         description: Updates the power status of all 
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/LEDPower'
+              $ref: '#/components/schemas/LEDPowerAll'
         required: true
       responses:
         '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LEDPower'          
-        '405':
+          description: Successful operation        
+        '500':
           description: Invalid input
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
-  /pet/findByStatus:
-    get:
-      tags:
-        - pet
-      summary: Finds Pets by status
-      description: Multiple status values can be provided with comma separated strings
-      operationId: findPetsByStatus
-      parameters:
-        - name: status
-          in: query
-          description: Status values that need to be considered for filter
-          required: false
-          explode: true
-          schema:
-            type: string
-            default: available
-            enum:
-              - available
-              - pending
-              - sold
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/LEDPower'          
-        '400':
-          description: Invalid status value
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
-  /pet/findByTags:
-    get:
-      tags:
-        - pet
-      summary: Finds Pets by tags
-      description: Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
-      operationId: findPetsByTags
-      parameters:
-        - name: tags
-          in: query
-          description: Tags to filter by
-          required: false
-          explode: true
-          schema:
-            type: array
-            items:
-              type: string
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/LEDPower'          
-        '400':
-          description: Invalid tag value
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
-  /pet/{petId}:
-    get:
-      tags:
-        - pet
-      summary: Find pet by ID
-      description: Returns a single pet
-      operationId: getPetById
-      parameters:
-        - name: petId
-          in: path
-          description: ID of pet to return
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/LEDPower'          
-        '400':
-          description: Invalid ID supplied
-        '404':
-          description: Pet not found
-      security:
-        - api_key: []
-        - petstore_auth:
-            - write:pets
-            - read:pets
+
+  /led/power/:
     post:
       tags:
-        - pet
-      summary: Updates a pet in the store with form data
-      description: ''
-      operationId: updatePetWithForm
-      parameters:
-        - name: petId
-          in: path
-          description: ID of pet that needs to be updated
-          required: true
-          schema:
-            type: integer
-            format: int64
-        - name: name
-          in: query
-          description: Name of pet that needs to be updated
-          schema:
-            type: string
-        - name: status
-          in: query
-          description: Status of pet that needs to be updated
-          schema:
-            type: string
-      responses:
-        '405':
-          description: Invalid input
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
-    delete:
-      tags:
-        - pet
-      summary: Deletes a pet
-      description: delete a pet
-      operationId: deletePet
-      parameters:
-        - name: api_key
-          in: header
-          description: ''
-          required: false
-          schema:
-            type: string
-        - name: petId
-          in: path
-          description: Pet id to delete
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '400':
-          description: Invalid pet value
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
-  /pet/{petId}/uploadImage:
-    post:
-      tags:
-        - pet
-      summary: uploads an image
-      description: ''
-      operationId: uploadFile
-      parameters:
-        - name: petId
-          in: path
-          description: ID of pet to update
-          required: true
-          schema:
-            type: integer
-            format: int64
-        - name: additionalMetadata
-          in: query
-          description: Additional Metadata
-          required: false
-          schema:
-            type: string
+        - LED Strip - Power
+      summary: Change power state of multiple LED Strips
+      description: Change power state of multiple LED Strips
       requestBody:
+        description: Updates the power status of multiple led strips
         content:
-          application/octet-stream:
+          application/json:
             schema:
-              type: string
-              format: binary
+              $ref: '#/components/schemas/LEDPowerMultiple'
+        required: true
       responses:
         '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiResponse'
-      security:
-        - petstore_auth:
-            - write:pets
-            - read:pets
+          description: Successful operation        
+        '500':
+          description: Invalid input
+
+  /led/power/{id}:
+    post:
+      tags:
+        - LED Strip - Power
+      summary: Change power state of single LED Strip
+      description: Change power state of single LED Strip
+      requestBody:
+        description: Updates the power status of single led strip
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LEDPowerSingle'
+        required: true
+      responses:
+        '200':
+          description: Successful operation        
+        '500':
+          description: Invalid input
+
+
+  /led/brightness/all:
+    post:
+      tags:
+        - LED Strip - Brightness
+      summary: Change brightness of all LED Strips
+      description: Change brightness of all LED Strips (Use a number between 1 and 100)
+      requestBody:
+        description: Updates the brightness of all led strips
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LEDBrightnessAll'
+        required: true
+      responses:
+        '200':
+          description: Successful operation        
+        '500':
+          description: Invalid input
+ 
+
+
+  /led/color/all:
+    post:
+      tags:
+        - LED Strip - Color
+      summary: Change color of all LED Strips
+      description: Change color of all LED Strips
+      requestBody:
+        description: Updates the color of all led strips
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LEDColorAll'
+        required: true
+      responses:
+        '200':
+          description: Successful operation        
+        '500':
+          description: Invalid input
+
+  /led/color/:
+    post:
+      tags:
+        - LED Strip - Color
+      summary: Change Color state of multiple LED Strips
+      description: Change Color state of multiple LED Strips
+      requestBody:
+        description: Updates the Color status of multiple led strips
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LEDColorMultiple'
+        required: true
+      responses:
+        '200':
+          description: Successful operation        
+        '500':
+          description: Invalid input
+      
+  /led/color/{id}:
+    post:
+      tags:
+        - LED Strip - Color
+      summary: Change Color of single LED Strip
+      description: Change Color of single LED Strip
+      requestBody:
+        description: Updates the Color of single led strip
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LEDColorSingle'
+        required: true
+      responses:
+        '200':
+          description: Successful operation        
+        '500':
+          description: Invalid input
+
 components:
   schemas:
-    LEDPower:
+    LEDPowerAll:
       required:
         - value
       type: object
@@ -245,28 +151,69 @@ components:
         value:
           type: boolean
           example: true
-      xml:
-        name: pet
 
-    ApiResponse:
+    LEDColorAll:
+      required:
+        - value
       type: object
       properties:
-        code:
-          type: integer
-          format: int32
-        type:
+        value:
           type: string
-        message:
+          example: '#FF0000'
+
+    LEDBrightnessAll:
+      required:
+        - value
+      type: object
+      properties:
+        value:
+          type: number
+          example: 100
+
+    LEDPowerMultiple:
+      required:
+        - value
+        - devices
+      type: object
+      properties:
+        value:
+          type: boolean
+          example: true
+        devices:
+          type: object
+          example: [
+            0, 1, 2
+          ]
+
+    LEDColorMultiple:
+      required:
+        - value
+        - devices
+      type: object
+      properties:
+        value:
           type: string
-      xml:
-        name: '##default'
-  requestBodies:
-    Pet:
-      description: Pet object that needs to be added to the store
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/LEDPower'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/LEDPower'
+          example: '#FF0000'
+        devices:
+          type: object
+          example: [
+            0, 1, 2
+          ]
+
+    LEDPowerSingle:
+      required:
+        - value
+      type: object
+      properties:
+        value:
+          type: boolean
+          example: true
+    
+    LEDColorSingle:
+      required:
+        - value
+      type: object
+      properties:
+        value:
+          type: string
+          example: '#FF0000'
