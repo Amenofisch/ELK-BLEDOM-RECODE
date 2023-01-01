@@ -5,7 +5,7 @@ var config = require('../config/config');
 
 // This route returns the config of the server
 router.get('/config', function(req, res, next) {
-    res.send(JSON.stringify(config));
+    res.send(JSON.parse(config.toString()));
 });
 
 
