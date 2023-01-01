@@ -177,7 +177,7 @@ router.post('/color/', function(req, res, next) {
 })
 
 router.post('/custom/', function(req, res, next) {
-    if(req.body.value == undefined || req.body.devies == undefined) return res.status(400).send("No value specified");
+    if(req.body.value == undefined || req.body.devices == undefined) return res.status(400).send("No value specified");
     let value = req.body.value;
     let devices = req.body.devices;
 
