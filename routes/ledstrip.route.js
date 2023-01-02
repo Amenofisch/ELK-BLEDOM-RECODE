@@ -72,58 +72,6 @@ router.post('/custom/all', function(req, res, next) {
 });
 
 /**
- * This section is for controlling a single device
- * The routes are the same as above, but with an id parameter
- * The id parameter is used to select a single device from the config
- * The id parameter is the index of the device in the config
- * These routes are usefull for when you don't want to use the main route (aka. being lazy)
- */
-
-// This route controls the power of a single device
-router.post('/power/:id', function(req, res, next) {
-    if(req.body.value == undefined) return res.status(400).send("No value specified");
-    let value = req.body.value;
-    if(typeof value != "boolean") return res.status(400).send("Value must be a boolean");
-
-    let device = config.devices[req.params.id];
-    let resp = device.setPower(value);
-    res.send(resp);
-});
-
-// This route controls the brightness of a single device
-router.post('/brightness/:id', function(req, res, next) {
-    if(req.body.value == undefined) return res.status(400).send("No value specified");
-    let value = req.body.value;
-    if(typeof value != "number") return res.status(400).send("Value must be a number");
-
-    let device = config.devices[req.params.id];
-    let resp = device.setBrightness(value);
-    res.send(resp);
-});
-
-// This route controls the color of a single device
-router.post('/color/:id', function(req, res, next) {
-    if(req.body.value == undefined) return res.status(400).send("No value specified");
-    let value = req.body.value;
-    if(typeof value != "string") return res.status(400).send("Value must be a string");
-
-    let device = config.devices[req.params.id];
-    let resp = device.setColor(value.toLowerCase());
-    res.send(resp);
-});
-
-// This route takes a custom command for a single device
-router.post('/custom/:id', function(req, res, next) {
-    if(req.body.value == undefined) return res.status(400).send("No value specified");
-    let value = req.body.value;
-    if(typeof value != "string") return res.status(400).send("Value must be a string");
-
-    let device = config.devices[req.params.id];
-    let resp = device.sendCustom(value);
-    res.send(resp);
-});
-
-/**
  * These routes are for controlling multiple devices at once
  * They all take an array of device id's in the body (these are the same id's as the ones in the config file, basically the index of the device in the array)
  * They also take a value in the body, this value is different for each route (see above)
@@ -169,10 +117,8 @@ router.post('/color/', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < devices.length; i++) {
-        resp.push(config.devices[devices[i]].setColor(value.toLowerCase()).then((status) => {
-            return "status: " + status;
-        }));
-    }
+        resp.push("status: " + config.devices[devices[i]].setColor(value.toLowerCase())) 
+    };
     res.send(resp);
 })
 
