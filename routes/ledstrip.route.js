@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var config = require('../config/config');
 
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+
 // This route returns the config of all devices
 router.get('/', function(req, res, next) {
     res.send(config.devices);
