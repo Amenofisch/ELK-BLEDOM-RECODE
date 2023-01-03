@@ -8,5 +8,12 @@ router.get('/config', function(req, res, next) {
     res.send(JSON.stringify(config));
 });
 
+router.get('/config/devices', function(req, res, next) {
+    res.send(JSON.stringify(config.devices));
+});
+
+router.get('/config/devices/:id', function(req, res, next) {
+    res.send(JSON.stringify(config.devices[req.params.id]));
+});
 
 module.exports = router;
