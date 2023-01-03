@@ -1,14 +1,14 @@
 openapi: 3.0.3
 info:
   title: ELK-BLEDOM-RECODE
-  description: This is the WIP OpenAPI Specification of ELK-BLEDOM-RECODE.
+  description: This is the OpenAPI Specification of ELK-BLEDOM-RECODE.
   version: 1.0.0
 paths:
   /led/power/all:
     post:
       tags:
         - LED Strip - Power
-      summary: Change power state of  all LED Strips
+      summary: Change power state of all LED Strips
       description: Change power state of all LED Strips
       operationId: changePowerAll
       requestBody:
@@ -28,10 +28,10 @@ paths:
     post:
       tags:
         - LED Strip - Power
-      summary: Change power state of multiple LED Strips
-      description: Change power state of multiple LED Strips
+      summary: Change power state of multiple/single LED Strips
+      description: Change power state of multiple/single LED Strips
       requestBody:
-        description: Updates the power status of multiple led strips
+        description: Updates the power status of multiple/single led strips
         content:
           application/json:
             schema:
@@ -42,26 +42,6 @@ paths:
           description: Successful operation        
         '500':
           description: Invalid input
-
-  /led/power/{id}:
-    post:
-      tags:
-        - LED Strip - Power
-      summary: Change power state of single LED Strip
-      description: Change power state of single LED Strip
-      requestBody:
-        description: Updates the power status of single led strip
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LEDPowerSingle'
-        required: true
-      responses:
-        '200':
-          description: Successful operation        
-        '500':
-          description: Invalid input
-
 
   /led/brightness/all:
     post:
@@ -75,6 +55,25 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/LEDBrightnessAll'
+        required: true
+      responses:
+        '200':
+          description: Successful operation        
+        '500':
+          description: Invalid input
+
+  /led/brightness/:
+    post:
+      tags:
+        - LED Strip - Brightness
+      summary: Change brightness of multiple/single LED Strips
+      description: Change brightness of multiple/single LED Strips
+      requestBody:
+        description: Updates the brightness of multiple/single led strips
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LEDBrightnessMultiple'
         required: true
       responses:
         '200':
@@ -107,10 +106,10 @@ paths:
     post:
       tags:
         - LED Strip - Color
-      summary: Change Color state of multiple LED Strips
-      description: Change Color state of multiple LED Strips
+      summary: Change Color state of multiple/single LED Strips
+      description: Change Color state of multiple/single LED Strips
       requestBody:
-        description: Updates the Color status of multiple led strips
+        description: Updates the Color status of multiple/single led strips
         content:
           application/json:
             schema:
@@ -121,25 +120,7 @@ paths:
           description: Successful operation        
         '500':
           description: Invalid input
-      
-  /led/color/{id}:
-    post:
-      tags:
-        - LED Strip - Color
-      summary: Change Color of single LED Strip
-      description: Change Color of single LED Strip
-      requestBody:
-        description: Updates the Color of single led strip
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LEDColorSingle'
-        required: true
-      responses:
-        '200':
-          description: Successful operation        
-        '500':
-          description: Invalid input
+
 
 components:
   schemas:
@@ -170,6 +151,21 @@ components:
           type: number
           example: 100
 
+    LEDBrightnessMultiple:
+      required:
+        - value
+        - devices
+      type: object
+      properties:
+        value:
+          type: integer
+          example: 50
+        devices:
+          type: object
+          example: [
+            0, 1, 2
+          ]
+
     LEDPowerMultiple:
       required:
         - value
@@ -199,21 +195,3 @@ components:
           example: [
             0, 1, 2
           ]
-
-    LEDPowerSingle:
-      required:
-        - value
-      type: object
-      properties:
-        value:
-          type: boolean
-          example: true
-    
-    LEDColorSingle:
-      required:
-        - value
-      type: object
-      properties:
-        value:
-          type: string
-          example: '#FF0000'

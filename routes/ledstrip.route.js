@@ -74,7 +74,7 @@ router.post('/custom/all', function(req, res, next) {
 /**
  * These routes are for controlling multiple devices at once
  * They all take an array of device id's in the body (these are the same id's as the ones in the config file, basically the index of the device in the array)
- * They also take a value in the body, this value is different for each route (see above)
+ * They also take a value in the body, this value is different for each route (boolean, integer, string/hex color, hex instruction)
  */
 
 router.post('/power/', function(req, res, next) {
