@@ -90,7 +90,7 @@ router.post('/power/', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < devices.length; i++) {
-        if(config.devices[i].id == devices[i]) resp.push(config.devices.where({id: devices[i]}).setPower(value));
+        if(config.devices[i].id == devices[i]) resp.push(config.devices[i].id.setPower(value));
     }
     res.send(resp);
 })
@@ -105,7 +105,7 @@ router.post('/brightness/', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < devices.length; i++) {
-        if(config.devices[i].id == devices[i]) resp.push(config.devices.where({id: devices[i]}).setBrightness(value));
+        if(config.devices[i].id == devices[i]) resp.push(config.devices[i].setBrightness(value));
     }
     res.send(resp);
 })
@@ -120,7 +120,7 @@ router.post('/color/', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < devices.length; i++) {
-        if(config.devices[i].id == devices[i]) resp.push(config.devices.where({id: devices[i]}).setColor(value));
+        if(config.devices[i].id == devices[i]) resp.push(config.devices[i].setColor(value)); 
     };
     res.send(resp);
 })
@@ -135,7 +135,7 @@ router.post('/custom/', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < devices.length; i++) {
-        if(config.devices[i].id == devices[i]) resp.push(config.devices.where({id: devices[i]}).sendCustom(value));
+        if(config.devices[i].id == devices[i]) resp.push(config.devices[i].sendCustom(value));
     }
     res.send(resp);
 })
