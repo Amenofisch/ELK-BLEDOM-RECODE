@@ -12,7 +12,9 @@ router.get('/', function(req, res, next) {
 
 // This route returns the config of a single device
 router.get('/:id', function(req, res, next) {
-    res.send(config.devices[req.params.id]);
+    for(let i = 0; i < config.devices.length; i++) {
+        if(config.devices[i].id == req.params.id) return res.send(config.devices[i]);
+    }
 });
 
 /**
@@ -90,7 +92,7 @@ router.post('/power/', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < devices.length; i++) {
-        resp.push("status: " + config.devices[devices[i]].setPower(value));
+        if(config.devices[i].id == devices[i]) resp.push(config.devices[i].setPower(value));
     }
     res.send(resp);
 })
@@ -105,7 +107,7 @@ router.post('/brightness/', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < devices.length; i++) {
-        resp.push("status: " + config.devices[devices[i]].setBrightness(value));
+        if(config.devices[i].id == devices[i]) resp.push(config.devices[i].setBrightness(value));
     }
     res.send(resp);
 })
@@ -120,7 +122,7 @@ router.post('/color/', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < devices.length; i++) {
-        resp.push("status: " + config.devices[devices[i]].setColor(value.toLowerCase())) 
+        if(config.devices[i].id == devices[i]) resp.push(config.devices[i].setColor(value)); 
     };
     res.send(resp);
 })
@@ -135,7 +137,7 @@ router.post('/custom/', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < devices.length; i++) {
-        resp.push("status: " + config.devices[devices[i]].sendCustom(value));
+        if(config.devices[i].id == devices[i]) resp.push(config.devices[i].sendCustom(value));
     }
     res.send(resp);
 })
