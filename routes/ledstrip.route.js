@@ -30,7 +30,7 @@ router.post('/power/all', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < config.devices.length; i++) {
-        resp.push("status: " + config.devices[i].setPower(value));
+        resp.push(config.devices[i].setPower(value));
     }
     res.send(resp);
 })
@@ -43,7 +43,7 @@ router.post('/brightness/all', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < config.devices.length; i++) {
-        resp.push("status: " + config.devices[i].setBrightness(value));
+        resp.push(config.devices[i].setBrightness(value));
     }
     res.send(resp);
 })
@@ -56,9 +56,7 @@ router.post('/color/all', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < config.devices.length; i++) {
-        resp.push(config.devices[i].setColor(value.toLowerCase()).then((status) => {
-            return "status: " + status;
-        }));
+        resp.push(config.devices[i].setColor(value.toLowerCase()));
     }
     res.send(resp);
 })
@@ -71,7 +69,7 @@ router.post('/custom/all', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < config.devices.length; i++) {
-        resp.push("status: " + config.devices[i].sendCustom(value));
+        resp.push(config.devices[i].sendCustom(value));
     }
     res.send(resp);
 });
