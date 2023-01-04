@@ -90,7 +90,8 @@ router.post('/power/', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < devices.length; i++) {
-        if(config.devices.find(device => device.id == devices[i])) resp.push(config.devices[i].setPower(value));
+        let device = config.devices.find(device => device.id == devices[i]);
+        if(device) resp.push(device.setPower(value));
     }
     res.send(resp);
 })
@@ -105,7 +106,8 @@ router.post('/brightness/', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < devices.length; i++) {
-        if(config.devices.find(device => device.id == devices[i])) resp.push(config.devices[i].setBrightness(value));
+        let device = config.devices.find(device => device.id == devices[i]);
+        if(device) resp.push(device.setBrightness(value));
     }
     res.send(resp);
 })
@@ -120,8 +122,9 @@ router.post('/color/', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < devices.length; i++) {
-        if(config.devices.find(device => device.id == devices[i])) resp.push(config.devices[i].setColor(value)); 
-    };
+        let device = config.devices.find(device => device.id == devices[i]);
+        if(device) resp.push(device.setColor(value.toLowerCase()));
+    }
     res.send(resp);
 })
 
@@ -135,7 +138,8 @@ router.post('/custom/', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < devices.length; i++) {
-        if(config.devices.find(device => device.id == devices[i])) resp.push(config.devices[i].sendCustom(value));
+        let device = config.devices.find(device => device.id == devices[i]);
+        if(device) resp.push(device.sendCustom(value));
     }
     res.send(resp);
 })
