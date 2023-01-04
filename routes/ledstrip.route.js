@@ -90,7 +90,7 @@ router.post('/power/', function(req, res, next) {
 
     let resp = [];
     for(let i = 0; i < devices.length; i++) {
-        if(config.devices[i].id == devices[i]) resp.push(config.devices[i].id.setPower(value));
+        if(config.devices[i].id == devices[i]) resp.push(config.devices[i].setPower(value));
     }
     res.send(resp);
 })
