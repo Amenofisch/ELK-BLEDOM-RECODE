@@ -8,7 +8,8 @@ var shell = require("shelljs");
  * @param {string} device The Bluetooth device to use
  */
 class Ledstrip {
-    constructor(name, bid, handle, device) {
+    constructor(id, name, bid, handle, device) {
+        this.id = id;
         this.name = name;
         this.bid = bid;
         this.handle = handle;
