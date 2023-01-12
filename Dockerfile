@@ -6,6 +6,6 @@ COPY package.json .
 
 RUN npm install --quiet
 
-RUN apk add bluez
+RUN apk add bluez-deprecated bluez
 
 COPY . .
