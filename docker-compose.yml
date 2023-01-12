@@ -1,6 +1,7 @@
 version: '2'
 services:
   ledstrip:
+    container_name: elk-bledom-recode
     build: .
     command: node index.js
     volumes: 
