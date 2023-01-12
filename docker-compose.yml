@@ -4,6 +4,7 @@ services:
     container_name: elk-bledom-recode
     build: .
     command: node index.js
+    privileged: true
     volumes: 
       - .:/app
       - /app/node_modules
