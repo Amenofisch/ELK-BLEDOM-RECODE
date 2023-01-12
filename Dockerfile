@@ -6,6 +6,6 @@ COPY package.json .
 
 RUN npm install --quiet
 
-RUN apt-get install bluetooth bluez libbluetooth-dev libudev-dev
+RUN apk add bluetooth bluez bluez-utils libbluetooth-dev libudev-dev
 
 COPY . .
