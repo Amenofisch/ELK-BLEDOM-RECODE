@@ -1,6 +1,8 @@
 version: '2'
 services:
   ledstrip:
+    build: .
+    command: node index.js
     volumes: 
       - .:/app
       - /app/node_modules
