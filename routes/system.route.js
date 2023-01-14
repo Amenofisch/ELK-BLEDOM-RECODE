@@ -11,7 +11,13 @@ router.get('/config/devices', function(req, res, next) {
 });
 
 router.get('/config/devices/:id', function(req, res, next) {
-    res.send(config.devices.where(d => d.id == req.params.id));
+    var devicesToBeSent = [];
+
+    for (let i = 0; i < config.devices.length; i++) {
+        if(config.devices[i].id == req.params.id) devicesToBeSent.push(config.devices[i]);
+    }
+
+    res.send(devicesToBeSent);
 });
 
 router.get('/config', function(req, res, next) {
